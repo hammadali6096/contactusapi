@@ -32,9 +32,9 @@ app.post("/contact_us", function (req, res) {
     });
     var mailOptions = {
         from: process.env.EMAIL,
-        to: email,
+        to: process.env.TO_EMAIL,
         subject: subject,
-        text: msg
+        html: "<p>" + name + " </p> <b></b>"+ msg
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
