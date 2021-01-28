@@ -3,6 +3,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const app = express();
 var nodemailer = require('nodemailer');
+require('dotenv').config();
 
 // app.use(cors());
 app.use(bodyParser.json());
@@ -16,7 +17,6 @@ app.get("/", function (req, res) {
 
 // 
 app.post("/contact_us", function (req, res) {
-    console.log(req.body);
     var email = req.body.email;
     var name = req.body.name;
     var subject = req.body.subject;
@@ -26,15 +26,15 @@ app.post("/contact_us", function (req, res) {
         service: 'gmail',
         secure: false,
         auth: {
-            user: 'Hamadalihaadi598@gmail.com',
-            pass: '72547826598393270'
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
         }
     });
     var mailOptions = {
-        from: 'Hamadalihaadi598@gmail.com',
+        from: process.env.EMAIL,
         to: email,
-        subject: 'SQM',
-        text: 'Your email has been recieved.I will answer your query as soon as possible'
+        subject: subject,
+        text: msg
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
