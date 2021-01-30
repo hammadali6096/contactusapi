@@ -35,7 +35,7 @@ app.post("/contact_us", function (req, res) {
         from: process.env.EMAIL,
         to: process.env.TO_EMAIL,
         subject: subject,
-        html: "<p>" + name + " </p> <b></b>"+ msg
+        html: "<strong><p>Name: </strong> " + name + " </p> <b></b><strong> <p>Sender Email: </strong> "+email+"</p><b></b><strong> <p>Message: </strong> </p><b></b>"+ msg
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
